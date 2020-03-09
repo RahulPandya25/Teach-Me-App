@@ -1,10 +1,11 @@
 package com.teach.me.app.Enum;
 
-public enum UserTypeEnum {
-    TUTOR(0), STUDENT(1);
+public enum Difficulty {
+    EASY(0), MEDIUM(1), HARD(2);
 
     private int index;
-    UserTypeEnum(int index) {
+
+    Difficulty(int index) {
         this.index = index;
     }
 
