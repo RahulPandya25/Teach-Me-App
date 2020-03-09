@@ -19,4 +19,37 @@ public class User_Test implements Serializable {
     @ManyToOne
     @JoinColumn(name = "test_id")
     private Test test;
+
+    public long getUserTestId() {
+        return userTestId;
+    }
+
+    public void setUserTestId(long userTestId) {
+        this.userTestId = userTestId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
+    @Override
+    public String toString() {
+        return "User_Test{" +
+                "userTestId=" + userTestId +
+                ", user=" + user +
+                ", test=" + test +
+                '}';
+    }
 }
