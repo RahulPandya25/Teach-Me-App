@@ -10,7 +10,7 @@ public class UserTest implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userTestId;
+    private int userTestId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -20,11 +20,11 @@ public class UserTest implements Serializable {
     @JoinColumn(name = "test_id")
     private Test test;
 
-    public long getUserTestId() {
+    public int getUserTestId() {
         return userTestId;
     }
 
-    public void setUserTestId(long userTestId) {
+    public void setUserTestId(int userTestId) {
         this.userTestId = userTestId;
     }
 

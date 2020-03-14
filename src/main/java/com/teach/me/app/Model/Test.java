@@ -11,12 +11,12 @@ public class Test implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long testId;
+    private int testId;
 
     @NotNull
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
@@ -24,8 +24,7 @@ public class Test implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-
-    private String cheat_sheet;
+    private String cheatSheet;
 
     @NotNull
     private long totalTime;
@@ -33,11 +32,11 @@ public class Test implements Serializable {
     private long numberOfQuest;
     private String reference;
 
-    public long getTestId() {
+    public int getTestId() {
         return testId;
     }
 
-    public void setTestId(long testId) {
+    public void setTestId(int testId) {
         this.testId = testId;
     }
 
@@ -65,12 +64,12 @@ public class Test implements Serializable {
         this.user = user;
     }
 
-    public String getCheat_sheet() {
-        return cheat_sheet;
+    public String getCheatSheet() {
+        return cheatSheet;
     }
 
-    public void setCheat_sheet(String cheat_sheet) {
-        this.cheat_sheet = cheat_sheet;
+    public void setCheatSheet(String cheatSheet) {
+        this.cheatSheet = cheatSheet;
     }
 
     public long getTotalTime() {
@@ -104,7 +103,7 @@ public class Test implements Serializable {
                 ", name='" + name + '\'' +
                 ", subject=" + subject +
                 ", user=" + user +
-                ", cheat_sheet='" + cheat_sheet + '\'' +
+                ", cheat_sheet='" + cheatSheet + '\'' +
                 ", totalTime=" + totalTime +
                 ", numberOfQuest=" + numberOfQuest +
                 ", reference='" + reference + '\'' +
