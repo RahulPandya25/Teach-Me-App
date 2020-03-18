@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "test_result")
-public class Test_Result implements Serializable {
+public class TestResult implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long testResultId;
+    private int testResultId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -26,11 +26,11 @@ public class Test_Result implements Serializable {
     @NotNull
     private long totalQuestions;
 
-    public long getTestResultId() {
+    public int getTestResultId() {
         return testResultId;
     }
 
-    public void setTestResultId(long testResultId) {
+    public void setTestResultId(int testResultId) {
         this.testResultId = testResultId;
     }
 

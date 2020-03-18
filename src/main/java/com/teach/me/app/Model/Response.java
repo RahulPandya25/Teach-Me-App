@@ -13,7 +13,7 @@ public class Response implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long responseId;
+    private int responseId;
 
     @OneToOne
     @JoinColumn(name = "question_id")
@@ -32,11 +32,11 @@ public class Response implements Serializable {
     @NotNull
     private boolean correctness;
 
-    public long getResponseId() {
+    public int getResponseId() {
         return responseId;
     }
 
-    public void setResponseId(long responseId) {
+    public void setResponseId(int responseId) {
         this.responseId = responseId;
     }
 

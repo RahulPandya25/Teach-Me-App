@@ -13,7 +13,7 @@ public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long questionId;
+    private int questionId;
 
     @NotNull
     private String description;
@@ -28,17 +28,17 @@ public class Question implements Serializable {
     private String option_3;
     private String option_4;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "test_id")
     private Test test;
     @NotNull
     private Difficulty difficulty;
 
-    public long getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(long questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 

@@ -13,7 +13,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private int userId;
     @NotNull
     private String name;
     @NotNull
@@ -24,11 +24,11 @@ public class User implements Serializable {
     @NotNull
     private UserType type;
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

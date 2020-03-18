@@ -11,15 +11,15 @@ public class Subject implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long subjectId;
+    private int subjectId;
     @NotNull
     private String name;
 
-    public long getSubjectId() {
+    public int getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(long subjectId) {
+    public void setSubjectId(int subjectId) {
         this.subjectId = subjectId;
     }
 
