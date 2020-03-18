@@ -2,12 +2,15 @@ package com.teach.me.app.Controller;
 
 import com.teach.me.app.DTO.TestDTO;
 import com.teach.me.app.Model.Test;
+import com.teach.me.app.Service.ParsingExcelFileService;
 import com.teach.me.app.Service.TestService;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
@@ -17,10 +20,11 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    private ParsingExcelFileService parsingExcelFileService;
 
     @PostMapping("/test/insert")
-    private void inserTest(@RequestBody Test test){
+    private void insertTest(@RequestBody Test test){
         testService.insertTest(test);
     }
     @GetMapping("/test/all")
@@ -40,5 +44,11 @@ public class TestController {
         testDTO.setSubjectId(subjectId);
         testDTO.setTestList(tests);
         return testDTO;
+    }
+
+    @PostMapping("/test")
+    private void addQuestions() throws IOException, InvalidFormatException {
+        System.out.println("Inside TestController");
+        parsingExcelFileService.readFile();
     }
 }
