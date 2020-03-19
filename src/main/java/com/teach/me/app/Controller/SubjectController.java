@@ -5,6 +5,7 @@ import com.teach.me.app.Service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +24,10 @@ public class SubjectController {
     }
 
     @GetMapping("/all")
-    private List getAllSubjects(){
-        return subjectService.getAllSubjects();
+    private List<Subject> getAllSubjects(){
+         List<Subject> subjectList = new ArrayList<Subject>();
+         subjectList = subjectService.getAllSubjects();
+         return subjectList;
     }
 
     @GetMapping("/{subjectId}")

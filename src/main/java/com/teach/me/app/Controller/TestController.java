@@ -31,7 +31,9 @@ public class TestController {
     }
     @GetMapping("/test/all")
     private List<Test> getAllTests(){
-        return testService.getAllTests();
+        List<Test> testList = new ArrayList<Test>();
+        testList = testService.getAllTests();
+        return testList;
     }
     @GetMapping("/test/{testId}")
     private Optional<Test> getTestByTestId(@PathVariable int testId){
