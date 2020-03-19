@@ -27,4 +27,6 @@ public interface QuestionService {
      * @return
      */
      Optional<Question> getQuestionById(int id);
+
+     List<Question> getAllQuestionByTestId(int testId);
 }
