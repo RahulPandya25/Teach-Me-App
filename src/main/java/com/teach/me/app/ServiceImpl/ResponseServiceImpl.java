@@ -1,5 +1,6 @@
 package com.teach.me.app.ServiceImpl;
 
+import com.teach.me.app.Exception.ResponseNotFoundException;
 import com.teach.me.app.Model.Response;
 import com.teach.me.app.Repository.ResponseRepository;
 import com.teach.me.app.Service.ResponseService;
@@ -18,8 +19,8 @@ public class ResponseServiceImpl implements ResponseService {
      * @param response
      */
     @Override
-    public void insertResponse(Response response) {
-        responseRepository.save(response);
+    public Response insertResponse(Response response) {
+        return responseRepository.save(response);
     }
 
     /**
@@ -35,7 +36,7 @@ public class ResponseServiceImpl implements ResponseService {
      * @return
      */
     @Override
-    public Optional<Response> getResponseById(int responseId) {
-        return responseRepository.findById(responseId);
+    public Response getResponseById(int responseId) throws ResponseNotFoundException {
+        return responseRepository.findById(responseId).orElseThrow(ResponseNotFoundException::new);
     }
 }

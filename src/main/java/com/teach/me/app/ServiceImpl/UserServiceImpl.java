@@ -1,5 +1,6 @@
 package com.teach.me.app.ServiceImpl;
 
+import com.teach.me.app.Exception.UserNotFoundException;
 import com.teach.me.app.Model.User;
 import com.teach.me.app.Repository.UserRepository;
 import com.teach.me.app.Service.UserService;
@@ -18,8 +19,8 @@ public class UserServiceImpl implements UserService {
      * @param user
      */
     @Override
-    public void insertUser(User user) {
-        userRepository.save(user);
+    public User insertUser(User user) {
+        return userRepository.save(user);
     }
 
     /**
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public Optional<User> getUserById(int userId) {
-        return userRepository.findById(userId);
+    public User getUserById(int userId) throws UserNotFoundException {
+        return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 }

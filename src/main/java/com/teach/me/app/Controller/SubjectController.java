@@ -1,5 +1,6 @@
 package com.teach.me.app.Controller;
 
+import com.teach.me.app.Exception.SubjectNotFoundException;
 import com.teach.me.app.Model.Subject;
 import com.teach.me.app.Service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class SubjectController {
     }
 
     @GetMapping("/{subjectId}")
-    private Optional<Subject> getSubjectById(@PathVariable int subjectId){
+    private Subject getSubjectById(@PathVariable int subjectId) throws SubjectNotFoundException {
         return subjectService.getSubjectById(subjectId);
     }
 

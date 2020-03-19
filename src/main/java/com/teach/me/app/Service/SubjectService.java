@@ -1,5 +1,6 @@
 package com.teach.me.app.Service;
 
+import com.teach.me.app.Exception.SubjectNotFoundException;
 import com.teach.me.app.Model.Subject;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public interface SubjectService {
      *
      * @param subject
      */
-    public void insertSubject(Subject subject);
+    public Subject insertSubject(Subject subject);
 
     /**
      *
@@ -25,5 +26,5 @@ public interface SubjectService {
      * @param id
      * @return
      */
-    public Optional<Subject> getSubjectById(int id);
+    public Subject getSubjectById(int id) throws SubjectNotFoundException;
 }

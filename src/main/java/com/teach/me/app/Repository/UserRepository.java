@@ -15,4 +15,6 @@ import com.teach.me.app.Model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
 
+
+
 }

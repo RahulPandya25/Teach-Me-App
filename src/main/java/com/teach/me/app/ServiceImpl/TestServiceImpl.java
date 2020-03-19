@@ -1,5 +1,6 @@
 package com.teach.me.app.ServiceImpl;
 
+import com.teach.me.app.Exception.TestNotFoundException;
 import com.teach.me.app.Model.Test;
 import com.teach.me.app.Repository.TestRepository;
 import com.teach.me.app.Service.TestService;
@@ -18,8 +19,8 @@ public class TestServiceImpl implements TestService {
      * @param test
      */
     @Override
-    public void insertTest(Test test) {
-        testRepository.save(test);
+    public Test insertTest(Test test) {
+        return testRepository.save(test);
     }
 
     /**
@@ -35,8 +36,8 @@ public class TestServiceImpl implements TestService {
      * @return
      */
     @Override
-    public Optional<Test> getTestById(int testId) {
-        return testRepository.findById(testId);
+    public Test getTestById(int testId) throws TestNotFoundException {
+        return testRepository.findById(testId).orElseThrow(TestNotFoundException::new);
     }
 
     /**

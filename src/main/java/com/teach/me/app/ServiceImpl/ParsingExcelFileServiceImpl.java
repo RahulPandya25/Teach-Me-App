@@ -26,12 +26,12 @@ public class ParsingExcelFileServiceImpl implements ParsingExcelFileService {
     QuestionService questionService;
 
     @Override
-    public void readFile() throws IOException, InvalidFormatException {
+    public void readFile(String filePath, Test test) throws IOException, InvalidFormatException {
 
         //adding static path temporarily
-        String filePath = "F:\\Advanced Software Engineering Concepts\\Final Project\\Teach-Me-App\\src\\main\\resources\\Book1.xlsx";
-        System.out.println(filePath);
-        File file = new File(filePath);
+        String path = "F:\\Advanced Software Engineering Concepts\\Final Project\\Teach-Me-App\\src\\main\\resources\\Book1.xlsx";
+        System.out.println(path);
+        File file = new File(path);
         //Creating a workbook
         XSSFWorkbook workbook = new XSSFWorkbook(file);
 
@@ -44,11 +44,9 @@ public class ParsingExcelFileServiceImpl implements ParsingExcelFileService {
             }
         }
 
-        Test test = new Test();
+
         test.setTestId(1);
-        test.setName("Arrays");
-        test.setNumberOfQuest(10);
-        test.setTotalTime(120);
+
         System.out.println(sheet.getLastRowNum());
         for(int i = 1; i <= sheet.getLastRowNum(); i ++){
             System.out.println("Inside for loop");
@@ -62,6 +60,9 @@ public class ParsingExcelFileServiceImpl implements ParsingExcelFileService {
             question.setAnswer(Option.valueOf(row.getCell(6).getStringCellValue().toUpperCase()));
             question.setDifficulty(Difficulty.valueOf(row.getCell(7).getStringCellValue().toUpperCase()));
             question.setTest(test);
+            System.out.println(Option.valueOf(row.getCell(6).getStringCellValue().toUpperCase()));
+            System.out.println(Option.valueOf(row.getCell(6).getStringCellValue().toUpperCase()).ordinal());
+            System.out.println(Option.valueOf(row.getCell(6).getStringCellValue().toUpperCase()).getIndex());
             System.out.println(question.toString());
             questionService.insertQuestion(question);
         }

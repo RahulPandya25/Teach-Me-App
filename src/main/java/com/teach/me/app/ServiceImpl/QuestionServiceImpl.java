@@ -1,5 +1,6 @@
 package com.teach.me.app.ServiceImpl;
 
+import com.teach.me.app.Exception.QuestionNotFoundException;
 import com.teach.me.app.Model.Question;
 import com.teach.me.app.Repository.QuestionRepository;
 import com.teach.me.app.Service.QuestionService;
@@ -35,8 +36,8 @@ public class QuestionServiceImpl implements QuestionService {
      * @return
      */
     @Override
-    public Optional<Question> getQuestionById(int id) {
-        return questionRepository.findById(id);
+    public Question getQuestionById(int id) throws QuestionNotFoundException {
+        return questionRepository.findById(id).orElseThrow(QuestionNotFoundException::new);
     }
 
     @Override
