@@ -1,10 +1,12 @@
 package com.teach.me.app.Controller;
 
 import com.teach.me.app.Model.Response;
+import com.teach.me.app.Model.User;
 import com.teach.me.app.Service.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +25,9 @@ public class ResponseController {
 
     @GetMapping("/all")
     private List<Response> getAllResponses(){
-        return  responseService.getAllResponses();
+        List<Response> responseList = new ArrayList<Response>();
+        responseList = responseService.getAllResponses();
+        return  responseList;
     }
 
     @GetMapping("/{id}")

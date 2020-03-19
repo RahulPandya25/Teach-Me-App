@@ -5,6 +5,7 @@ import com.teach.me.app.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,10 @@ public class UserController {
         userService.insertUser(user);
     }
     @GetMapping("/all")
-    private List getAllUser(){
-        return userService.getAllUsers();
+    private List<User> getAllUser(){
+        List<User> userList = new ArrayList<User>();
+        userList = userService.getAllUsers();
+        return  userList;
     }
     @GetMapping("/{userId}")
     private Optional<User> getUserById(@PathVariable int userId){
