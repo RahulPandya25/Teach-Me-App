@@ -9,22 +9,28 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/question")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
 
-    @PostMapping("/insert")
+    @PostMapping("/question/insert")
     private void insertQuestion(@RequestBody Question question){
         questionService.insertQuestion(question);
     }
-    @GetMapping("/all")
+    @GetMapping("/question/all")
     private List getAllQuestions(){
         return questionService.getAllQuestions();
     }
-    @GetMapping("/{id}")
+    @GetMapping("/question/{id}")
     private Optional<Question> getQuestionById(@PathVariable int id){
         return questionService.getQuestionById(id);
     }
+
+    @GetMapping("/test/questions/{testId}")
+    private List<Question> getQuestionsByTestId(@PathVariable int testId){
+        return  questionService.getAllQuestionByTestId(testId);
+    }
+
 }

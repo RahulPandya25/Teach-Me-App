@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TestController {
     @Autowired
     private TestService testService;
@@ -38,7 +40,8 @@ public class TestController {
 
     @GetMapping("/subject/test/{subjectId}")
     private TestDTO getTestsBySubjectId(@PathVariable int subjectId){
-        List<Test> tests = testService.getTestsBySubjectId(subjectId);
+        List<Test> tests = new ArrayList<Test>();
+        tests = testService.getTestsBySubjectId(subjectId);
         TestDTO testDTO = new TestDTO();
         testDTO.setSubjectName(tests.get(0).getSubject().getName());
         testDTO.setSubjectId(subjectId);

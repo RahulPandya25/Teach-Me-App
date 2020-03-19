@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/response")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ResponseController {
 
     @Autowired
