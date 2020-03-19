@@ -1,5 +1,6 @@
 package com.teach.me.app.Controller;
 
+import com.teach.me.app.Exception.ResponseNotFoundException;
 import com.teach.me.app.Model.Response;
 import com.teach.me.app.Model.User;
 import com.teach.me.app.Service.ResponseService;
@@ -31,7 +32,7 @@ public class ResponseController {
     }
 
     @GetMapping("/{id}")
-    private Optional<Response> getResponseById(@PathVariable int responseId){
+    private Response getResponseById(@PathVariable int responseId) throws ResponseNotFoundException {
         return responseService.getResponseById(responseId);
     }
 }

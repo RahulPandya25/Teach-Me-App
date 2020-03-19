@@ -1,5 +1,6 @@
 package com.teach.me.app.Controller;
 
+import com.teach.me.app.Exception.QuestionNotFoundException;
 import com.teach.me.app.Model.Question;
 import com.teach.me.app.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class QuestionController {
         return questionService.getAllQuestions();
     }
     @GetMapping("/question/{id}")
-    private Optional<Question> getQuestionById(@PathVariable int id){
+    private Question getQuestionById(@PathVariable int id) throws QuestionNotFoundException {
         return questionService.getQuestionById(id);
     }
 

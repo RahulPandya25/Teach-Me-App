@@ -1,5 +1,6 @@
 package com.teach.me.app.Service;
 
+import com.teach.me.app.Exception.TestNotFoundException;
 import com.teach.me.app.Model.Test;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public interface TestService {
      *
      * @param test
      */
-     void insertTest(Test test);
+     Test insertTest(Test test);
 
     /**
      *
@@ -25,7 +26,7 @@ public interface TestService {
      * @param id
      * @return
      */
-     Optional<Test> getTestById(int id);
+     Test getTestById(int id) throws TestNotFoundException;
 
     /**
      *

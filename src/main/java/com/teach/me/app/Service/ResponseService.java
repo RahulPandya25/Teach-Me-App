@@ -1,5 +1,6 @@
 package com.teach.me.app.Service;
 
+import com.teach.me.app.Exception.ResponseNotFoundException;
 import com.teach.me.app.Model.Response;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public interface ResponseService {
      *
      * @param response
      */
-    public void insertResponse(Response response);
+    public Response insertResponse(Response response);
 
     /**
      *
@@ -25,5 +26,5 @@ public interface ResponseService {
      * @param id
      * @return
      */
-    public Optional<Response> getResponseById(int id);
+    public Response getResponseById(int id) throws ResponseNotFoundException;
 }

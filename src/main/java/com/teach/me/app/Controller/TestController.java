@@ -1,20 +1,22 @@
 package com.teach.me.app.Controller;
 
 import com.teach.me.app.DTO.TestDTO;
+import com.teach.me.app.Exception.SubjectNotFoundException;
+import com.teach.me.app.Exception.TestNotFoundException;
+import com.teach.me.app.Model.Subject;
 import com.teach.me.app.Model.Test;
 import com.teach.me.app.Service.ParsingExcelFileService;
+import com.teach.me.app.Service.SubjectService;
 import com.teach.me.app.Service.TestService;
+import com.teach.me.app.Service.UploadFileService;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -23,11 +25,18 @@ public class TestController {
     private TestService testService;
 
     @Autowired
+    private SubjectService subjectService;
+
+    @Autowired
     private ParsingExcelFileService parsingExcelFileService;
 
+    @Autowired
+    private UploadFileService uploadFileService;
+
     @PostMapping("/test/insert")
-    private void insertTest(@RequestBody Test test){
-        testService.insertTest(test);
+    private void insertTest(@RequestBody Test test, @RequestParam MultipartFile file){
+        test = testService.insertTest(test);
+        uploadFileService.saveFile(file);
     }
     @GetMapping("/test/all")
     private List<Test> getAllTests(){
@@ -36,24 +45,25 @@ public class TestController {
         return testList;
     }
     @GetMapping("/test/{testId}")
-    private Optional<Test> getTestByTestId(@PathVariable int testId){
-        return testService.getTestById(testId);
+    private Test getTestByTestId(@PathVariable int testId) throws TestNotFoundException {
+         return testService.getTestById(testId);
     }
 
     @GetMapping("/subject/test/{subjectId}")
-    private TestDTO getTestsBySubjectId(@PathVariable int subjectId){
+    private TestDTO getTestsBySubjectId(@PathVariable int subjectId) throws SubjectNotFoundException {
+        Subject subject = subjectService.getSubjectById(subjectId);
         List<Test> tests = new ArrayList<Test>();
         tests = testService.getTestsBySubjectId(subjectId);
         TestDTO testDTO = new TestDTO();
-        testDTO.setSubjectName(tests.get(0).getSubject().getName());
+        testDTO.setSubjectName(subject.getName());
         testDTO.setSubjectId(subjectId);
         testDTO.setTestList(tests);
         return testDTO;
+
     }
 
     @PostMapping("/test")
     private void addQuestions() throws IOException, InvalidFormatException {
-        System.out.println("Inside TestController");
         parsingExcelFileService.readFile();
     }
 }

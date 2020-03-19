@@ -1,5 +1,6 @@
 package com.teach.me.app.Service;
 
+import com.teach.me.app.Exception.QuestionNotFoundException;
 import com.teach.me.app.Model.Question;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public interface QuestionService {
      * @param id
      * @return
      */
-     Optional<Question> getQuestionById(int id);
+     Question getQuestionById(int id) throws QuestionNotFoundException;
 
      List<Question> getAllQuestionByTestId(int testId);
 }

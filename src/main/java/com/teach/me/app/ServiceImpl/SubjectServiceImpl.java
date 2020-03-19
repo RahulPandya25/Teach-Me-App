@@ -1,5 +1,6 @@
 package com.teach.me.app.ServiceImpl;
 
+import com.teach.me.app.Exception.SubjectNotFoundException;
 import com.teach.me.app.Model.Subject;
 import com.teach.me.app.Repository.SubjectRepository;
 import com.teach.me.app.Service.SubjectService;
@@ -16,11 +17,11 @@ public class SubjectServiceImpl implements SubjectService {
     private SubjectRepository subjectRepository;
     /**
      * @param subject
+     * @return
      */
     @Override
-    public void insertSubject(Subject subject) {
-        System.out.println("Inside SubjectServiceImpl: "+ subject.toString());
-        subjectRepository.save(subject);
+    public Subject insertSubject(Subject subject) {
+        return subjectRepository.save(subject);
     }
 
     /**
@@ -36,7 +37,7 @@ public class SubjectServiceImpl implements SubjectService {
      * @return
      */
     @Override
-    public Optional<Subject> getSubjectById(int subjectId) {
-        return subjectRepository.findById(subjectId);
+    public Subject getSubjectById(int subjectId) throws SubjectNotFoundException {
+        return subjectRepository.findById(subjectId).orElseThrow(SubjectNotFoundException::new);
     }
 }

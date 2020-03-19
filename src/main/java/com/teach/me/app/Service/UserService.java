@@ -1,5 +1,6 @@
 package com.teach.me.app.Service;
 
+import com.teach.me.app.Exception.UserNotFoundException;
 import com.teach.me.app.Model.User;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public interface UserService {
      *
      * @param user
      */
-    public void insertUser(User user);
+    public User insertUser(User user);
 
     /**
      *
@@ -25,5 +26,5 @@ public interface UserService {
      * @param id
      * @return
      */
-    public Optional<User> getUserById(int id);
+    public User getUserById(int id) throws UserNotFoundException;
 }

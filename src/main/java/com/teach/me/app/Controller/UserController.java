@@ -1,5 +1,6 @@
 package com.teach.me.app.Controller;
 
+import com.teach.me.app.Exception.UserNotFoundException;
 import com.teach.me.app.Model.User;
 import com.teach.me.app.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class UserController {
         return  userList;
     }
     @GetMapping("/{userId}")
-    private Optional<User> getUserById(@PathVariable int userId){
+    private User getUserById(@PathVariable int userId) throws UserNotFoundException {
         return userService.getUserById(userId);
     }
 }
