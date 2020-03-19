@@ -38,4 +38,9 @@ public class QuestionServiceImpl implements QuestionService {
     public Optional<Question> getQuestionById(int id) {
         return questionRepository.findById(id);
     }
+
+    @Override
+    public List<Question> getAllQuestionByTestId(int testId) {
+        return questionRepository.findAllByTestTestId(testId);
+    }
 }
