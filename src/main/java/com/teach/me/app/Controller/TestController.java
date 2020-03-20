@@ -33,9 +33,9 @@ public class TestController {
     private UploadFileService uploadFileService;
 
     @PostMapping("/test/insert")
-    private void insertTest(@RequestBody Test test, @RequestParam MultipartFile file){
+    private void insertTest(@RequestBody Test test){
         test = testService.insertTest(test);
-        uploadFileService.saveFile(file);
+        System.out.println(test);
     }
     @GetMapping("/test/all")
     private List<Test> getAllTests(){
@@ -50,13 +50,8 @@ public class TestController {
 
     @GetMapping("/subject/test/{subjectId}")
     private TestDTO getTestsBySubjectId(@PathVariable int subjectId) throws SubjectNotFoundException {
-        Subject subject = subjectService.getSubjectById(subjectId);
-        List<Test> tests = new ArrayList<Test>();
-        tests = testService.getTestsBySubjectId(subjectId);
         TestDTO testDTO = new TestDTO();
-        testDTO.setSubjectName(subject.getName());
-        testDTO.setSubjectId(subjectId);
-        testDTO.setTestList(tests);
+        testDTO = testService.getTestsBySubjectId(subjectId);
         return testDTO;
 
     }
