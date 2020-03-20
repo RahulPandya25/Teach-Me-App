@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class SubjectServiceImpl implements SubjectService {
@@ -21,6 +20,11 @@ public class SubjectServiceImpl implements SubjectService {
      */
     @Override
     public Subject insertSubject(Subject subject) {
+        List<Subject> allSubjects = subjectRepository.findAll();
+        for (Subject s : allSubjects) {
+            if (s.getName().equals(subject.getName()))
+                return null;
+        }
         return subjectRepository.save(subject);
     }
 
