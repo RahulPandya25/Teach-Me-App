@@ -13,7 +13,6 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +63,6 @@ public class TestController {
 
     @PostMapping("/test")
     private void addQuestions() throws IOException, InvalidFormatException {
-        parsingExcelFileService.readFile();
+       // parsingExcelFileService.readFile();
     }
 }
