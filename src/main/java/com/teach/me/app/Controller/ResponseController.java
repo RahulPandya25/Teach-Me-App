@@ -35,4 +35,15 @@ public class ResponseController {
     private Response getResponseById(@PathVariable int responseId) throws ResponseNotFoundException {
         return responseService.getResponseById(responseId);
     }
+
+    @GetMapping("/{userId}/{testId}")
+    private List<Response> getResponseByTestIdAndUserId(@PathVariable int userId, @PathVariable int testId){
+        List<Response> responseList = new ArrayList<Response>();
+        System.out.println("UserId: " + userId + " TestId: " + testId);
+        responseList = responseService.getReponseByTestIdAndUserId(testId, userId);
+        for(Response response : responseList){
+            System.out.println(response);
+        }
+        return  responseList;
+    }
 }

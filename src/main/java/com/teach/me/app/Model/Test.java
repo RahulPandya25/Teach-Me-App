@@ -16,7 +16,7 @@ public class Test implements Serializable {
     @NotNull
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
 

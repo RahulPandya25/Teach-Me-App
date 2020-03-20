@@ -1,5 +1,7 @@
 package com.teach.me.app.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.teach.me.app.Enum.Option;
 
 import javax.persistence.*;
@@ -17,13 +19,15 @@ public class Response implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Question question;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     @JoinColumn(name = "test_id")
     private Test test;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

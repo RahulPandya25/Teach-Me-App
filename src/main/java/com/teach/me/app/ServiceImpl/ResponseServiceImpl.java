@@ -39,4 +39,14 @@ public class ResponseServiceImpl implements ResponseService {
     public Response getResponseById(int responseId) throws ResponseNotFoundException {
         return responseRepository.findById(responseId).orElseThrow(ResponseNotFoundException::new);
     }
+
+    /**
+     * @param testId
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Response> getReponseByTestIdAndUserId(int testId, int userId) {
+        return responseRepository.getByUserUserIdAndTestTestId(userId, testId);
+    }
 }

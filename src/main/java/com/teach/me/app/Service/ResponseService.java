@@ -27,4 +27,12 @@ public interface ResponseService {
      * @return
      */
     public Response getResponseById(int id) throws ResponseNotFoundException;
+
+    /**
+     *
+     * @param testId
+     * @param userId
+     * @return
+     */
+    public List<Response> getReponseByTestIdAndUserId(int testId, int userId);
 }
