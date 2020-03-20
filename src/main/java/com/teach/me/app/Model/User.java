@@ -18,9 +18,9 @@ public class User implements Serializable {
     private String name;
     @NotNull
     private String email;
-    private String contactNumber;
+    private String contact;
     @NotNull
-    private String pwd;
+    private String password;
     @NotNull
     private UserType type;
 
@@ -48,20 +48,20 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getContact() {
+        return contact;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setContact(String contactNumber) {
+        this.contact = contactNumber;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setPassword(String pwd) {
+        this.password = pwd;
     }
 
     public UserType getType() {
@@ -78,8 +78,8 @@ public class User implements Serializable {
                 "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", contactNumber='" + contactNumber + '\'' +
-                ", pwd='" + pwd + '\'' +
+                ", contactNumber='" + contact + '\'' +
+                ", pwd='" + password + '\'' +
                 ", type=" + type +
                 '}';
     }
