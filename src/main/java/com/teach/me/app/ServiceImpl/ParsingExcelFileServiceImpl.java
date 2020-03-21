@@ -27,7 +27,7 @@ public class ParsingExcelFileServiceImpl implements ParsingExcelFileService {
     public void readFile(String fileName, Test test) throws IOException, InvalidFormatException {
 
         //Setting the path of the file
-        String path = "src/main/resources/uploads" + fileName;
+        String path = "src/main/resources/uploads/" + fileName;
 
         File file = new File(path);
         //Creating a workbook
