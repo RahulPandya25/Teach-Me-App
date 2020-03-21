@@ -35,4 +35,28 @@ public interface ResponseService {
      * @return
      */
     public List<Response> getReponseByTestIdAndUserId(int testId, int userId);
+
+    /**
+     *
+     * @param userId
+     * @param questId
+     * @return
+     */
+    public boolean isQuestionAttempted(int userId, int questId);
+
+    /**
+     *
+     * @param userId
+     * @param questId
+     * @return
+     */
+    public Response getResponseByUserAndQuest(int userId, int questId) throws ResponseNotFoundException;
+
+    /**
+     *
+     * @param userId
+     * @param questId
+     * @param answer
+     */
+    public void submitResponse(int userId, int questId, String answer) throws ResponseNotFoundException;
 }

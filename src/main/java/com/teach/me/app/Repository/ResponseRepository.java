@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ResponseRepository extends JpaRepository<Response, Integer > {
@@ -15,6 +16,8 @@ public interface ResponseRepository extends JpaRepository<Response, Integer > {
 //    List<Response> getResponseByUserIdAndTestId(int testId, int userId);
 
     List<Response> getByUserUserIdAndTestTestId(int userId, int testId);
+
+    Optional<Response> getByUserUserIdAndQuestionQuestionId(int userId, int testId);
 
 
 }

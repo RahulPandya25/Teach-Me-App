@@ -1,8 +1,10 @@
 package com.teach.me.app.Controller;
 
+import com.teach.me.app.Enum.Option;
 import com.teach.me.app.Exception.ResponseNotFoundException;
 import com.teach.me.app.Model.Response;
 import com.teach.me.app.Model.User;
+import com.teach.me.app.Repository.ResponseRepository;
 import com.teach.me.app.Service.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +21,17 @@ public class ResponseController {
     @Autowired
     private ResponseService responseService;
 
+    @Autowired
+    private ResponseRepository responseRepository;
+
     @PostMapping("/insert")
     private void insertResponse(@RequestBody Response response){
         responseService.insertResponse(response);
+    }
+
+    @GetMapping("/submitResponse/{userId}/{questId}/{answer}")
+    private void submitResponse(@PathVariable int userId, @PathVariable int questId, @PathVariable String answer) throws ResponseNotFoundException {
+
     }
 
     @GetMapping("/all")

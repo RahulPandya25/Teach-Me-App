@@ -34,5 +34,10 @@ public class UserTestController {
         return userTestService.isTestAttempted(userId, testId);
     }
 
+    @GetMapping("/userTest/insert/{userId}/{testId}")
+    private void insertUserTest(@PathVariable int userId, @PathVariable int testId){
+
+    }
+
 
 }

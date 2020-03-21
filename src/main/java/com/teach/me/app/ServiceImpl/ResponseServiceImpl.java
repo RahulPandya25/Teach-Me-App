@@ -1,5 +1,6 @@
 package com.teach.me.app.ServiceImpl;
 
+import com.teach.me.app.Enum.Option;
 import com.teach.me.app.Exception.ResponseNotFoundException;
 import com.teach.me.app.Model.Response;
 import com.teach.me.app.Repository.ResponseRepository;
@@ -48,5 +49,40 @@ public class ResponseServiceImpl implements ResponseService {
     @Override
     public List<Response> getReponseByTestIdAndUserId(int testId, int userId) {
         return responseRepository.getByUserUserIdAndTestTestId(userId, testId);
+    }
+
+    /**
+     * @param userId
+     * @param questId
+     * @return
+     */
+    @Override
+    public boolean isQuestionAttempted(int userId, int questId) {
+        Optional<Response> response = responseRepository.getByUserUserIdAndQuestionQuestionId(userId, questId);
+        return response.isPresent();
+    }
+
+    /**
+     * @param userId
+     * @param questId
+     * @return
+     */
+    @Override
+    public Response getResponseByUserAndQuest(int userId, int questId) throws ResponseNotFoundException {
+        return responseRepository.getByUserUserIdAndQuestionQuestionId(userId, questId).orElseThrow(ResponseNotFoundException::new);
+    }
+
+    /**
+     * @param userId
+     * @param questId
+     * @param answer
+     */
+    @Override
+    public void submitResponse(int userId, int questId, String answer) throws ResponseNotFoundException {
+        Response response = getResponseByUserAndQuest(userId,questId);
+        response.setCorrectness(response.getQuestion().getAnswer().getIndex() == Option.valueOf(answer.toUpperCase()).getIndex());
+        response.setStatus("COMPLETED");
+        response.setResponse(Option.valueOf(answer.toUpperCase()));
+        responseRepository.save(response);
     }
 }

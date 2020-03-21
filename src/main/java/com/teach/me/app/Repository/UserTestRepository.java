@@ -20,4 +20,5 @@ public interface UserTestRepository extends JpaRepository<UserTest, Integer> {
     public Optional<UserTest> getByUserUserIdAndTestTestId(int userId, int testId);
 
     public List<UserTest> getUserByTestTestId(int testId);
+
 }

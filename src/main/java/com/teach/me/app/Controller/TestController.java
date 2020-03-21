@@ -35,7 +35,7 @@ public class TestController {
     private UserService userService;
 
     @PostMapping("/test/insert")
-    private void insertTest(@RequestParam("file") MultipartFile file, @RequestParam("testName") String name, @RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId, @RequestParam("cheatSheet") String cheatSheet,@RequestParam("totalQuestion") long totalQuestion,@RequestParam("totalTime") long totalTime,@RequestParam("references") String references) throws IOException, InvalidFormatException, SubjectNotFoundException, UserNotFoundException {
+    private void insertTest(@RequestParam("file") MultipartFile file, @RequestParam("testName") String name, @RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId, @RequestParam("cheatSheet") String cheatSheet,@RequestParam("totalQuestion") int totalQuestion,@RequestParam("totalTime") long totalTime,@RequestParam("references") String references) throws IOException, InvalidFormatException, SubjectNotFoundException, UserNotFoundException {
         Test newTest = new Test();
         Subject subject = subjectService.getSubjectById(subjectId);
         User user = userService.getUserById(userId);

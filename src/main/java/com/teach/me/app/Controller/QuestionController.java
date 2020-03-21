@@ -1,6 +1,7 @@
 package com.teach.me.app.Controller;
 
 import com.teach.me.app.Exception.QuestionNotFoundException;
+import com.teach.me.app.Exception.UserNotFoundException;
 import com.teach.me.app.Model.Question;
 import com.teach.me.app.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,15 @@ public class QuestionController {
     @GetMapping("/test/questions/{testId}")
     private List<Question> getQuestionsByTestId(@PathVariable int testId){
         return  questionService.getAllQuestionByTestId(testId);
+    }
+
+    @GetMapping("/takeTest/{testId}/{userId}")
+    private Question getRandomQuestion(@PathVariable int testId, @PathVariable int userId) throws UserNotFoundException {
+        Question question = null;
+        while (question == null) {
+            question = questionService.getRandomQuestion(testId, userId);
+        }
+        return question;
     }
 
 }

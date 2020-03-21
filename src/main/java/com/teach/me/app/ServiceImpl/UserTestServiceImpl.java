@@ -1,10 +1,14 @@
 package com.teach.me.app.ServiceImpl;
 
+import com.teach.me.app.Exception.TestNotFoundException;
+import com.teach.me.app.Exception.UserNotFoundException;
 import com.teach.me.app.Model.Test;
 import com.teach.me.app.Model.User;
 import com.teach.me.app.Model.UserTest;
 import com.teach.me.app.Repository.UserRepository;
 import com.teach.me.app.Repository.UserTestRepository;
+import com.teach.me.app.Service.TestService;
+import com.teach.me.app.Service.UserService;
 import com.teach.me.app.Service.UserTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +22,12 @@ public class UserTestServiceImpl implements UserTestService {
 
     @Autowired
     private UserTestRepository userTestRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private TestService testService;
     /**
      * @param userId
      * @return
@@ -55,5 +65,17 @@ public class UserTestServiceImpl implements UserTestService {
             userList.add(userTest.getUser());
         }
         return userList;
+    }
+
+    /**
+     * @param userId
+     * @param testId
+     */
+    @Override
+    public void insertUserTest(int userId, int testId) throws UserNotFoundException, TestNotFoundException {
+        UserTest userTest = new UserTest();
+        userTest.setUser(userService.getUserById(userId));
+        userTest.setTest(testService.getTestById(testId));
+        userTestRepository.save(userTest);
     }
 }

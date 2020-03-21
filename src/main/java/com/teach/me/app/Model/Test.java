@@ -29,7 +29,7 @@ public class Test implements Serializable {
     @NotNull
     private long totalTime;
     @NotNull
-    private long numberOfQuest;
+    private int numberOfQuest;
     private String reference;
 
     public int getTestId() {
@@ -80,11 +80,11 @@ public class Test implements Serializable {
         this.totalTime = totalTime;
     }
 
-    public long getNumberOfQuest() {
+    public int getNumberOfQuest() {
         return numberOfQuest;
     }
 
-    public void setNumberOfQuest(long numberOfQuest) {
+    public void setNumberOfQuest(int numberOfQuest) {
         this.numberOfQuest = numberOfQuest;
     }
 
