@@ -30,8 +30,8 @@ public class ResponseController {
     }
 
     @GetMapping("/submitResponse/{userId}/{questId}/{answer}")
-    private void submitResponse(@PathVariable int userId, @PathVariable int questId, @PathVariable String answer) throws ResponseNotFoundException {
-
+    private void submitResponse(@PathVariable int userId, @PathVariable String questId, @PathVariable String answer) throws ResponseNotFoundException {
+        responseService.submitResponse(userId, Integer.parseInt(questId), answer);
     }
 
     @GetMapping("/all")
