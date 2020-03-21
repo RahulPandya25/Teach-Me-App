@@ -8,19 +8,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 @Component
 public class UploadFileServiceImpl implements UploadFileService {
 
-    private String rootPath = "F:\\Advanced Software Engineering Concepts\\Final Project\\Teach-Me-App\\src\\main\\resources\\uploads";
+    private String rootPath = "src/main/resources/uploads";
     private final Path rootLocation = Paths.get(rootPath);
 
 
     @Override
     public String saveFile(MultipartFile file) {
         try{
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(Objects.requireNonNull(file.getOriginalFilename())));
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(Objects.requireNonNull(file.getOriginalFilename())), StandardCopyOption.REPLACE_EXISTING);
             System.out.println(this.rootLocation.resolve(file.getOriginalFilename()).toString());
         } catch (Exception e) {
             throw new RuntimeException("Error occurred in saving the file");
