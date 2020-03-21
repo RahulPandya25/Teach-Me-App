@@ -5,11 +5,9 @@ import com.teach.me.app.Enum.Difficulty;
 import com.teach.me.app.Enum.Option;
 import com.teach.me.app.Model.Question;
 import com.teach.me.app.Model.Test;
-import com.teach.me.app.Repository.QuestionRepository;
 import com.teach.me.app.Service.ParsingExcelFileService;
 import com.teach.me.app.Service.QuestionService;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -29,7 +27,7 @@ public class ParsingExcelFileServiceImpl implements ParsingExcelFileService {
     public void readFile(String fileName, Test test) throws IOException, InvalidFormatException {
 
         //Setting the path of the file
-        String path = "F:\\Advanced Software Engineering Concepts\\Final Project\\Teach-Me-App\\src\\main\\resources\\uploads\\" + fileName;
+        String path = "src/main/resources/uploads" + fileName;
 
         File file = new File(path);
         //Creating a workbook
