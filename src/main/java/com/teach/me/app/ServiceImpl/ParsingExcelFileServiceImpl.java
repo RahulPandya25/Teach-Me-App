@@ -26,11 +26,11 @@ public class ParsingExcelFileServiceImpl implements ParsingExcelFileService {
     QuestionService questionService;
 
     @Override
-    public void readFile(String filePath, Test test) throws IOException, InvalidFormatException {
+    public void readFile(String fileName, Test test) throws IOException, InvalidFormatException {
 
-        //adding static path temporarily
-        String path = "F:\\Advanced Software Engineering Concepts\\Final Project\\Teach-Me-App\\src\\main\\resources\\Book1.xlsx";
-        System.out.println(path);
+        //Setting the path of the file
+        String path = "F:\\Advanced Software Engineering Concepts\\Final Project\\Teach-Me-App\\src\\main\\resources\\uploads\\" + fileName;
+
         File file = new File(path);
         //Creating a workbook
         XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -38,18 +38,8 @@ public class ParsingExcelFileServiceImpl implements ParsingExcelFileService {
         //Get the sheet from the workbook
         XSSFSheet sheet = workbook.getSheetAt(0);
 
-        for (Row row : sheet) {
-            for (Cell cell : row) {
-                System.out.println(cell.toString());
-            }
-        }
-
-
-        test.setTestId(1);
-
-        System.out.println(sheet.getLastRowNum());
+        //Iterating through the rows to get the questions
         for(int i = 1; i <= sheet.getLastRowNum(); i ++){
-            System.out.println("Inside for loop");
             Question question = new Question();
             Row row = sheet.getRow(i);
             question.setDescription(row.getCell(1).toString());
@@ -60,10 +50,6 @@ public class ParsingExcelFileServiceImpl implements ParsingExcelFileService {
             question.setAnswer(Option.valueOf(row.getCell(6).getStringCellValue().toUpperCase()));
             question.setDifficulty(Difficulty.valueOf(row.getCell(7).getStringCellValue().toUpperCase()));
             question.setTest(test);
-            System.out.println(Option.valueOf(row.getCell(6).getStringCellValue().toUpperCase()));
-            System.out.println(Option.valueOf(row.getCell(6).getStringCellValue().toUpperCase()).ordinal());
-            System.out.println(Option.valueOf(row.getCell(6).getStringCellValue().toUpperCase()).getIndex());
-            System.out.println(question.toString());
             questionService.insertQuestion(question);
         }
 

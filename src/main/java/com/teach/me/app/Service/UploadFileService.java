@@ -6,5 +6,5 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public interface UploadFileService {
 
-        void saveFile(MultipartFile file);
+        String saveFile(MultipartFile file);
 }

@@ -3,12 +3,11 @@ package com.teach.me.app.Controller;
 import com.teach.me.app.DTO.TestDTO;
 import com.teach.me.app.Exception.SubjectNotFoundException;
 import com.teach.me.app.Exception.TestNotFoundException;
+import com.teach.me.app.Exception.UserNotFoundException;
 import com.teach.me.app.Model.Subject;
 import com.teach.me.app.Model.Test;
-import com.teach.me.app.Service.ParsingExcelFileService;
-import com.teach.me.app.Service.SubjectService;
-import com.teach.me.app.Service.TestService;
-import com.teach.me.app.Service.UploadFileService;
+import com.teach.me.app.Model.User;
+import com.teach.me.app.Service.*;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +31,28 @@ public class TestController {
     @Autowired
     private UploadFileService uploadFileService;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/test/insert")
-    private void insertTest(@RequestBody Test test){
-        test = testService.insertTest(test);
+    private void insertTest(@RequestParam("file") MultipartFile file, @RequestParam("testName") String name, @RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId, @RequestParam("cheatSheet") String cheatSheet,@RequestParam("totalQuestion") long totalQuestion,@RequestParam("totalTime") long totalTime,@RequestParam("references") String references) throws IOException, InvalidFormatException, SubjectNotFoundException, UserNotFoundException {
+        Test newTest = new Test();
+        Subject subject = subjectService.getSubjectById(subjectId);
+        User user = userService.getUserById(userId);
+        newTest.setTotalTime(totalTime);
+        newTest.setNumberOfQuest(totalQuestion);
+        newTest.setName(name);
+        newTest.setCheatSheet(cheatSheet);
+        newTest.setReference(references);
+        newTest.setSubject(subject);
+        newTest.setUser(user);
+        Test test = testService.insertTest(newTest);
+        String fileName = uploadFileService.saveFile(file);
+        parsingExcelFileService.readFile(fileName, test);
         System.out.println(test);
+        //Test newTest = testService.insertTest(test);
+        // String fileName = uploadFileService.saveFile(file);
+        // parsingExcelFileService.readFile(fileName,newTest);
     }
     @GetMapping("/test/all")
     private List<Test> getAllTests(){
@@ -56,8 +73,4 @@ public class TestController {
 
     }
 
-    @PostMapping("/test")
-    private void addQuestions() throws IOException, InvalidFormatException {
-       // parsingExcelFileService.readFile();
-    }
 }

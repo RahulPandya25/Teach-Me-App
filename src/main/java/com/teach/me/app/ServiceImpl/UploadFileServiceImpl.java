@@ -18,12 +18,13 @@ public class UploadFileServiceImpl implements UploadFileService {
 
 
     @Override
-    public void saveFile(MultipartFile file) {
+    public String saveFile(MultipartFile file) {
         try{
             Files.copy(file.getInputStream(), this.rootLocation.resolve(Objects.requireNonNull(file.getOriginalFilename())));
             System.out.println(this.rootLocation.resolve(file.getOriginalFilename()).toString());
         } catch (Exception e) {
             throw new RuntimeException("Error occurred in saving the file");
         }
+        return file.getOriginalFilename();
     }
 }
