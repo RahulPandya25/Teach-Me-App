@@ -29,9 +29,9 @@ public class ResponseController {
         responseService.insertResponse(response);
     }
 
-    @GetMapping("/submitResponse/{userId}/{questId}/{answer}")
-    private void submitResponse(@PathVariable int userId, @PathVariable String questId, @PathVariable String answer) throws ResponseNotFoundException {
-        responseService.submitResponse(userId, Integer.parseInt(questId), answer);
+    @GetMapping("/submitResponse/{answer}/{userId}/{questId}")
+    private void submitResponse(@PathVariable int userId, @PathVariable int questId, @PathVariable String answer) throws ResponseNotFoundException {
+        responseService.submitResponse(userId, questId, answer);
     }
 
     @GetMapping("/all")
