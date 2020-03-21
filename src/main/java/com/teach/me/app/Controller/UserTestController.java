@@ -1,5 +1,7 @@
 package com.teach.me.app.Controller;
 
+import com.teach.me.app.Exception.TestNotFoundException;
+import com.teach.me.app.Exception.UserNotFoundException;
 import com.teach.me.app.Model.Test;
 import com.teach.me.app.Model.User;
 import com.teach.me.app.Service.UserTestService;
@@ -35,9 +37,10 @@ public class UserTestController {
     }
 
     @GetMapping("/userTest/insert/{userId}/{testId}")
-    private void insertUserTest(@PathVariable int userId, @PathVariable int testId){
-
+    private void insertUserTest(@PathVariable int userId, @PathVariable int testId) throws TestNotFoundException, UserNotFoundException {
+        userTestService.insertUserTest(userId, testId);
     }
+
 
 
 }
