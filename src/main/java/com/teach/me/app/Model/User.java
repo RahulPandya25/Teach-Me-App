@@ -22,7 +22,7 @@ public class User implements Serializable {
     @NotNull
     private String password;
     @NotNull
-    private UserType type;
+    private UserType userType;
 
     public int getUserId() {
         return userId;
@@ -64,12 +64,12 @@ public class User implements Serializable {
         this.password = pwd;
     }
 
-    public UserType getType() {
-        return type;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setType(UserType type) {
-        this.type = type;
+    public void setUserType(UserType type) {
+        this.userType = type;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", contactNumber='" + contact + '\'' +
                 ", pwd='" + password + '\'' +
-                ", type=" + type +
+                ", type=" + userType +
                 '}';
     }
 }

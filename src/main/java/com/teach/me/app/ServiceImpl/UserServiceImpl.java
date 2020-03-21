@@ -1,5 +1,6 @@
 package com.teach.me.app.ServiceImpl;
 
+import com.teach.me.app.DTO.UserDTO;
 import com.teach.me.app.Exception.UserNotFoundException;
 import com.teach.me.app.Model.User;
 import com.teach.me.app.Repository.UserRepository;
@@ -20,7 +21,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User insertUser(User user) {
-        return userRepository.save(user);
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+        if (!existingUser.isPresent())
+            return userRepository.save(user);
+        return null;
     }
 
     /**
@@ -38,5 +42,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(int userId) throws UserNotFoundException {
         return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public User getUserForLogin(UserDTO user) {
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser.isPresent() && (existingUser.get().getPassword().equals(user.getPassword())))
+            return existingUser.get();
+        return null;
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.teach.me.app.Model.User;
 
+import java.util.Optional;
+
 /**
  * @author Aayushee Dave
  *
@@ -16,5 +18,5 @@ import com.teach.me.app.Model.User;
 public interface UserRepository extends JpaRepository<User,Integer> {
 
 
-
+    Optional<User> findByEmail(String email);
 }
