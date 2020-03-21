@@ -1,9 +1,7 @@
 package com.teach.me.app.Controller;
 
-import com.teach.me.app.Enum.Option;
 import com.teach.me.app.Exception.ResponseNotFoundException;
 import com.teach.me.app.Model.Response;
-import com.teach.me.app.Model.User;
 import com.teach.me.app.Repository.ResponseRepository;
 import com.teach.me.app.Service.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/response")
@@ -51,9 +48,9 @@ public class ResponseController {
         List<Response> responseList = new ArrayList<Response>();
         System.out.println("UserId: " + userId + " TestId: " + testId);
         responseList = responseService.getReponseByTestIdAndUserId(testId, userId);
-        for(Response response : responseList){
-            System.out.println(response);
-        }
+//        for(Response response : responseList){
+//            System.out.println(response);
+//        }
         return  responseList;
     }
 }

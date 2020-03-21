@@ -70,7 +70,7 @@ public class QuestionServiceImpl implements QuestionService {
         if (!questionList.isEmpty()) {
             Random random = new Random();
             int questionIndex = random.nextInt(questionList.size());
-            if (!responseService.isQuestionAttempted(userId, questionList.get(questionIndex).getQuestionId()))
+            if (!responseService.isQuestionAttempted(userId, questionList.get(questionIndex).getQuestionId())) {
                 question = questionList.get(questionIndex);
                 Response response = new Response();
                 response.setQuestion(question);
@@ -78,6 +78,7 @@ public class QuestionServiceImpl implements QuestionService {
                 response.setTest(questionList.get(0).getTest());
                 response.setStatus("IN PROGRESS");
                 responseService.insertResponse(response);
+            }
         }
         return question;
     }
