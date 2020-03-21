@@ -73,9 +73,11 @@ public class UserTestServiceImpl implements UserTestService {
      */
     @Override
     public void insertUserTest(int userId, int testId) throws UserNotFoundException, TestNotFoundException {
-        UserTest userTest = new UserTest();
-        userTest.setUser(userService.getUserById(userId));
-        userTest.setTest(testService.getTestById(testId));
-        userTestRepository.save(userTest);
+        if(!isTestAttempted(userId, testId)) {
+            UserTest userTest = new UserTest();
+            userTest.setUser(userService.getUserById(userId));
+            userTest.setTest(testService.getTestById(testId));
+            userTestRepository.save(userTest);
+        }
     }
 }
