@@ -24,6 +24,7 @@ public class Test implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column( length = 100000 )
     private String cheatSheet;
 
     @NotNull
